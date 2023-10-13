@@ -1,0 +1,190 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+      <form #formElement [formGroup]="deliveryChallanForm">
+			<h5>Payment Advise</h5>
+			<div class="p-fluid p-formgrid grid">
+				<div class="field col-4 md:col-4">
+          <div class="form-group">
+            <label htmlFor="rdcno">RDC No.</label>
+					  <input pInputText id="rdcno" type="text" formControlName="rdcno" class="form-control" required/>
+          </div>
+          <div class="form-group">
+            <label htmlFor="Date">Date</label>
+					  <p-calendar [(ngModel)]="date" formControlName="date" class="form-control" required ></p-calendar>
+          </div>
+				</div>
+				<div class="field col-4 md:col-4">
+          <div class="form-group">
+            <label htmlFor="billto">Bill to</label>
+            <textarea rows="5" cols="30" pInputTextarea formControlName="billto" class="form-control" required ></textarea>
+          </div>
+				</div>
+				<div class="field col-4 md:col-4">
+          <div class="form-group">
+            <label htmlFor="shipto">Ship to</label>
+            <textarea rows="5" cols="30" pInputTextarea formControlName="shipto" class="form-control" required></textarea>
+          </div>
+				</div>
+			</div>
+			<div class="p-fluid p-formgrid grid">
+				<div class="field col-4 md:col-4">
+          <div class="form-group">
+            <label htmlFor="vehicleno">Vehicle Number</label>
+            <input pInputText id="vehicleno" type="text" formControlName="vehicleno" class="form-control" required/>
+          </div>
+				</div>
+				<div class="field col-4 md:col-4">
+          <div class="form-group">
+            <label htmlFor="gstinship">GSTIN</label>
+            <input pInputText id="gstinship" type="text" formControlName="gstinship" class="form-control" required/>
+          </div>
+				</div>
+				<div class="field col-4 md:col-4">
+          <div class="form-group">
+            <label htmlFor="gstinbill">GSTIN</label>
+            <input pInputText id="gstinbill" type="text" formControlName="gstinbill" class="form-control" required/>
+          </div>
+				</div>
+				<div class="field col-12 md:col-4">
+          <div class="form-group">
+            <label htmlFor="email">Email ID</label>
+            <input pInputText id="email" type="text" formControlName="email" class="form-control" required/>
+          </div>
+				</div>
+				<div class="field col-12 md:col-4">
+          <div class="form-group">
+            <label htmlFor="phone">Phone Number</label>
+            <input pInputText id="phone" type="text" formControlName="phone" class="form-control" required/>
+          </div>
+				</div>
+				<div class="field col-12 md:col-4">
+          <div class="form-group">
+            <label htmlFor="email">Return Date</label>
+            <p-calendar [(ngModel)]="rdate" formControlName="rdate" class="form-control" required></p-calendar>
+          </div>
+				</div>
+			</div>
+      </form>	
+			<button pButton type="button" (click)="addRow()" label="Add Row"></button>
+
+<p-table #table [value]="products" editMode="row">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>SNo</th>
+      <th>Item Code</th>
+      <th>Item Description</th>
+      <th>HSN Code</th>
+      <th>Nature of Processing</th>
+      <th>Qty</th>
+      <th>UOM</th>
+      <th>Rate</th>
+      <th>Estimated Value</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product let-editing="editing" let-index="rowIndex">
+    <tr>
+      <td [pEditableColumn]="product.sno" pEditableColumnField="sno">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText [(ngModel)]="product.sno" (keydown.enter)="onEnterKey(index)" autofocus>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ index + 1 }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td [pEditableColumn]="product.code" pEditableColumnField="code">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText [(ngModel)]="product.code" (keydown.enter)="onEnterKey(index)" autofocus>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.code }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td [pEditableColumn]="product.description" pEditableColumnField="description">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText [(ngModel)]="product.description" (keydown.enter)="onEnterKey(index)" autofocus>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.description }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td [pEditableColumn]="product.hsn" pEditableColumnField="hsn">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText [(ngModel)]="product.hsn" (keydown.enter)="onEnterKey(index)" autofocus>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.hsn }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td [pEditableColumn]="product.nop" pEditableColumnField="nop">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText [(ngModel)]="product.nop" (keydown.enter)="onEnterKey(index)" autofocus>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.nop }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td [pEditableColumn]="product.qty" pEditableColumnField="qty">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText [(ngModel)]="product.qty" (keydown.enter)="onEnterKey(index)" autofocus>
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.qty }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td [pEditableColumn]="product.eom" pEditableColumnField="eom">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText [(ngModel)]="product.eom" (keydown.enter)="onEnterKey(index)">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.eom }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td [pEditableColumn]="product.rate" pEditableColumnField="rate">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText [(ngModel)]="product.rate" (keydown.enter)="onEnterKey(index)">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.rate }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td [pEditableColumn]="product.evalue" pEditableColumnField="evalue">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <input pInputText [(ngModel)]="product.evalue" (keydown.enter)="onEnterKey(index)">
+          </ng-template>
+          <ng-template pTemplate="output">
+            {{ product.evalue }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td>
+        <button pButton type="button" (click)="deleteRow(index)" icon="pi pi-trash"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+    <button pButton type="submit" label="Submit" class="p-button-primary"></button>
+    <button pButton type="button" label="Reset" class="p-button-danger" (click)="resetForm()"></button>
+    <button pButton type="button" label="Preview PDF" class="p-button-secondary" (click)="previewPDF()"></button>
+    <button pButton type="button" label="Send Email" class="p-button-success" (click)="sendEmail()"></button>
+  </div>
+	</div>
+</div>

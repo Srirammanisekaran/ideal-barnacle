@@ -1,0 +1,73 @@
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>Payment Advise</h5>
+			<div class="p-fluid p-formgrid grid">	
+        <div class="field col-2 md:col-2">
+          <div class="form-group">
+            <label htmlFor="rdcno">Company Code</label>
+            <p-dropdown [options]="companycode" [(ngModel)]="selectedCode" placeholder="Select Company Code"  optionLabel="code" (onChange)="onOptionSelect($event)"></p-dropdown>
+          </div>
+        </div>
+        <div class="field col-2 md:col-2">
+          <div class="form-group">
+            <label htmlFor="rdcno">Vendor</label>
+            <p-dropdown [options]="vendorOptions" [editable]="true" [(ngModel)]="selectedVendor" placeholder="Select Vendor"></p-dropdown>
+          </div>
+        </div>	
+        <div class="field col-2 md:col-2">
+          <div class="form-group">
+            <label htmlFor="rdcno">Doc Type</label>
+            <p-dropdown [options]="doctype" [(ngModel)]="selectedtype" placeholder="Select Doc Type"  optionLabel="type" ></p-dropdown>
+          </div>
+        </div>
+        <div class="field col-2 md:col-2">
+          <div class="form-group">
+            <label htmlFor="rdcno">Document Number</label>
+            <p-dropdown [options]="dataOptions" [editable]="true" [(ngModel)]="selectedOption" placeholder="Select a Document Number" (onChange)="onOptionSelect($event)"></p-dropdown>
+          </div>
+				</div>	
+        <div class="field col-2 md:col-2">
+          <div class="form-group">
+            <label htmlFor="rdcno">Financial Year</label>
+            <p-dropdown [options]="finyear" [(ngModel)]="selectedyear" placeholder="Select Year"  optionLabel="year" ></p-dropdown>
+          </div>
+        </div>	
+        <div class="field col-2 md:col-2">
+          <div class="form-group">
+            <label htmlFor="rdcno">Posting Date</label>
+            <p-calendar [(ngModel)]="filterdate" [touchUI]="true" [readonlyInput]="true"></p-calendar>
+          </div>
+        </div>		
+			</div>
+
+<p-table [value]="selectedData" [tableStyle]="{'min-width': '50rem'}">
+  <ng-template pTemplate="header">
+      <tr>
+        <th>Doc No.</th>
+        <th>Posting Date</th>
+        <th>Reference</th>
+        <th>Currency</th>
+        <th>Amount</th>
+        <th></th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{ item.AccountingDocument }}</td>
+        <td>{{ convertTimestamp(item.PostingDate) }}</td>
+        <td>{{ item.DocumentReferenceID }}</td>
+        <td>{{ item.TransactionCurrency }}</td>
+        <td>{{ item.AmountInTransactionCurrency }}</td>
+        <td>
+          <button pButton type="button" label="Preview PDF" class="p-button-secondary" (click)="previewPDF( item.AccountingDocument, item.AmountInTransactionCurrency )"></button>
+        </td>
+      </tr>
+  </ng-template>
+</p-table>
+ 
+    <!-- <button pButton type="button" label="Preview PDF" class="p-button-secondary" (click)="previewPDF()"></button>
+    -->
+  </div>
+	</div>
+</div>
