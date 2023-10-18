@@ -5,20 +5,20 @@
 			<div class="p-fluid p-formgrid grid">	
         <div class="field col-2 md:col-2">
           <div class="form-group">
-            <label htmlFor="rdcno">Company Code</label>
+            <label htmlFor="">Company Code</label>
             <p-dropdown [options]="companycode" [(ngModel)]="selectedCode" placeholder="Select Company Code"  optionLabel="code" (onChange)="onOptionSelect($event)"></p-dropdown>
           </div>
         </div>
         <div class="field col-2 md:col-2">
           <div class="form-group">
             <label htmlFor="rdcno">Vendor</label>
-            <p-dropdown [options]="vendorOptions" [editable]="true" [(ngModel)]="selectedVendor" placeholder="Select Vendor"></p-dropdown>
+            <p-dropdown [options]="vendorOptions" [editable]="true" [(ngModel)]="selectedVendor" placeholder="Select Vendor" (onChange)="onOptionSelect($event)"></p-dropdown>
           </div>
         </div>	
         <div class="field col-2 md:col-2">
           <div class="form-group">
             <label htmlFor="rdcno">Doc Type</label>
-            <p-dropdown [options]="doctype" [(ngModel)]="selectedtype" placeholder="Select Doc Type"  optionLabel="type" ></p-dropdown>
+            <p-dropdown [options]="doctype" [(ngModel)]="selectedtype"  optionLabel="type" (onChange)="onOptionSelect($event)"></p-dropdown>
           </div>
         </div>
         <div class="field col-2 md:col-2">
@@ -30,17 +30,19 @@
         <div class="field col-2 md:col-2">
           <div class="form-group">
             <label htmlFor="rdcno">Financial Year</label>
-            <p-dropdown [options]="finyear" [(ngModel)]="selectedyear" placeholder="Select Year"  optionLabel="year" ></p-dropdown>
+            <p-dropdown [options]="finyear" [(ngModel)]="selectedyear" optionLabel="year" optionValue="year" (onChange)="onOptionSelect($event)"></p-dropdown>
+            <!-- <p-dropdown [(ngModel)]="selectedyear" (change)="onOptionSelect($event)">
+              <option *ngFor="let option of finyear" [value]="option.year">{{ option.year }}</option>
+            </p-dropdown> -->
           </div>
         </div>	
         <div class="field col-2 md:col-2">
           <div class="form-group">
             <label htmlFor="rdcno">Posting Date</label>
-            <p-calendar [(ngModel)]="filterdate" [touchUI]="true" [readonlyInput]="true"></p-calendar>
+            <p-calendar [(ngModel)]="filterdate" [touchUI]="true" placeholder="Select Date" [readonlyInput]="true"></p-calendar>
           </div>
         </div>		
 			</div>
-
 <p-table [value]="selectedData" [tableStyle]="{'min-width': '50rem'}">
   <ng-template pTemplate="header">
       <tr>
@@ -58,14 +60,13 @@
         <td>{{ convertTimestamp(item.PostingDate) }}</td>
         <td>{{ item.DocumentReferenceID }}</td>
         <td>{{ item.TransactionCurrency }}</td>
-        <td>{{ item.AmountInTransactionCurrency }}</td>
+        <td>{{ getAbsoluteValue(item.AmountInTransactionCurrency).toFixed(2) }}</td>
         <td>
           <button pButton type="button" label="Preview PDF" class="p-button-secondary" (click)="previewPDF( item.AccountingDocument, item.AmountInTransactionCurrency )"></button>
         </td>
       </tr>
   </ng-template>
 </p-table>
- 
     <!-- <button pButton type="button" label="Preview PDF" class="p-button-secondary" (click)="previewPDF()"></button>
     -->
   </div>
